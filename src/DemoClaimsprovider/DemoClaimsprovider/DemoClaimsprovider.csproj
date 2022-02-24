@@ -5,6 +5,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
+    <PackageReference Include="SpectoLogic.Identity.AADB2C.APIConnectors" Version="1.0.4-alpha" />
+    <PackageReference Include="SpectoLogic.Identity.AADB2C.APIConnectors.Generators" Version="1.0.4-alpha" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
