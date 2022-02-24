@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SpectoLogic.Identity.EasyAuth" Version="1.0.2-alpha" />
+  </ItemGroup>
+
 </Project>
