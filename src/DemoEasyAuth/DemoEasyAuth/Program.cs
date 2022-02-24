@@ -1,6 +1,6 @@
+using DemoEasyAuth.Models;
 using Newtonsoft.Json;
 using SpectoLogic.Identity.EasyAuth;
-using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,8 @@ builder.Services.AddControllersWithViews();
 // Add Easy Auth Library Auth Handler
 builder.Services.UseEasyAuthB2C(op =>
 {
+    op.TokenFactory = (json) => JsonConvert.DeserializeObject<CustomB2CToken>(json);
+    op.ClaimsPrincipalFactory = (identity) => new CustomClaimsPrincipal(identity);
 #if DEBUG
     op.IsDevelopmentEnvironment = true;
 #else

@@ -1,7 +1,6 @@
 ﻿using DemoEasyAuth.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Security.Claims;
 
 namespace DemoEasyAuth.Controllers
 {
@@ -16,10 +15,12 @@ namespace DemoEasyAuth.Controllers
 
         public IActionResult Index()
         {
-            var principal = (Request.HttpContext.User as ClaimsPrincipal);
+            var principal = (Request.HttpContext.User as CustomClaimsPrincipal);
             return View(new InfoViewModel()
             {
-                Email = principal?.Claims?.FirstOrDefault(c=>c.Type==ClaimTypes.Email)?.Value ?? "unknown",
+                Email = principal?.Email ?? "unknown",
+                ADCD_ID = principal?.ADCD_ID ?? "unknown",
+                LoyaltiyID = principal?.LoyaltiyID ?? "unknown"
             });
         }
 
