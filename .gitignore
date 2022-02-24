@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/DemoClaimsprovider/DemoClaimsprovider/Properties/ServiceDependencies/adcdb2cprovider - Zip Deploy
+/src/DemoClaimsprovider/DemoClaimsprovider/Properties/serviceDependencies.adcdb2cprovider - Zip Deploy.json
