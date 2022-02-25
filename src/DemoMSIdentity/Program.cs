@@ -1,5 +1,5 @@
+using DemoMSIdentity.Authentication;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -9,7 +9,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // SEE HERE ==>
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"));
+// Simple
+//.AddMicrosoftIdentityWebApp(builder
+//                            .Configuration.GetSection("AzureAdB2C"));
+// More Advanced Options
+.AddMicrosoftIdentityWebApp(options =>
+{
+    builder.Configuration.Bind("AzureAdB2C", options);
+    options.Events ??= new OpenIdConnectEvents();
+    options.Events.OnRedirectToIdentityProvider += async (context) =>
+    {
+        // Custom Code
+        // Don't remove this line
+        await Task.CompletedTask.ConfigureAwait(false);
+    };
+});
+
+builder.Services.AddTransient<IClaimsTransformation, DemoClaimsTransformation>();
 
 builder.Services.AddControllersWithViews();
 

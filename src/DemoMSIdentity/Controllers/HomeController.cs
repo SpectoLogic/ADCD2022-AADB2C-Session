@@ -1,7 +1,8 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using DemoMSIdentity.Extensions;
 using DemoMSIdentity.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace DemoMSIdentity.Controllers;
 
@@ -16,7 +17,13 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var principal = Request.HttpContext.User;
+        return View(new InfoViewModel()
+        {
+            Email = principal.GetEmail(),
+            ADCD_ID = principal.GetADCD_ID(),
+            LoyaltiyID = principal.GetLoyaltiyID()
+        });
     }
 
     [Authorize]
