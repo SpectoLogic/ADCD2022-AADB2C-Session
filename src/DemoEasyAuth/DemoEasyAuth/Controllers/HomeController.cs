@@ -15,7 +15,13 @@ namespace DemoEasyAuth.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var principal = (Request.HttpContext.User as CustomClaimsPrincipal);
+            return View(new InfoViewModel()
+            {
+                Email = principal?.Email ?? "unknown",
+                ADCD_ID = principal?.ADCD_ID ?? "unknown",
+                LoyaltiyID = principal?.LoyaltiyID ?? "unknown"
+            });
         }
 
         public IActionResult Privacy()
